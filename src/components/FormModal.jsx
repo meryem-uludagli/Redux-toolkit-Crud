@@ -3,16 +3,26 @@ import { inputs } from "../constants";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/slices/crudSlice";
 
-const FormModal = ({ show, handleClose }) => {
+const FormModal = ({ show, handleClose, task }) => {
   const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // formdata class'ından örnek al
     const formData = new FormData(e.target);
+
+    // inputlardaki verileri nesne haline getir
     const taskData = Object.fromEntries(formData.entries());
-    dispatch(addTask(taskData));
+
+    if (!task) {
+      dispatch(addTask(taskData));
+    } else {
+    }
+
     handleClose();
   };
+
   return (
     <Modal centered show={show} onHide={handleClose} className="text-black">
       <Modal.Header closeButton>
@@ -47,4 +57,5 @@ const FormModal = ({ show, handleClose }) => {
     </Modal>
   );
 };
+
 export default FormModal;
