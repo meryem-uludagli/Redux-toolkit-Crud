@@ -1,12 +1,17 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import { inputs } from "../constants";
+import { useDispatch } from "react-redux";
+import { addTask } from "../redux/slices/crudSlice";
 
 const FormModal = ({ show, handleClose }) => {
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const taskData = Object.fromEntries(formData.entries());
+    dispatch(addTask(taskData));
+    handleClose();
   };
   return (
     <Modal centered show={show} onHide={handleClose} className="text-black">

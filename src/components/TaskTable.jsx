@@ -1,6 +1,8 @@
 import { Button, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const TaskTable = () => {
+  const { tasks } = useSelector((store) => store.crudReducer);
   return (
     <Table variant="dark" striped hover bordered responsive>
       <thead>
